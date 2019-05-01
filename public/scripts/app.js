@@ -4,9 +4,10 @@ console.log('App.js is running!');
 
 //JSX - JavaScript XML
 
-var appObject = {
+var app = {
     title: 'wasupp',
-    subtitle: 'it works!'
+    subtitle: 'it works!',
+    options: ['One', 'Two']
 };
 
 var template = React.createElement(
@@ -15,12 +16,17 @@ var template = React.createElement(
     React.createElement(
         'h1',
         null,
-        appObject.title
+        app.title
+    ),
+    app.subtitle && React.createElement(
+        'p',
+        null,
+        app.subtitle
     ),
     React.createElement(
         'p',
         null,
-        appObject.subtitle
+        app.options.length > 0 ? 'Here are your options' : 'No options'
     ),
     React.createElement(
         'ol',
@@ -38,34 +44,46 @@ var template = React.createElement(
     )
 );
 
-var user = {
-    name: 'Bar',
-    age: 26,
-    location: 'work'
-};
-
+var count = 0;
 var templateTwo = React.createElement(
     'div',
     null,
     React.createElement(
         'h1',
         null,
-        user.name
+        'count: ',
+        count
     ),
     React.createElement(
-        'p',
-        null,
-        'Age: ',
-        user.age
+        'button',
+        { onClick: addOne },
+        '+1'
     ),
     React.createElement(
-        'p',
-        null,
-        'Location: ',
-        user.location
+        'button',
+        { onClick: minusOne },
+        '-1'
+    ),
+    React.createElement(
+        'button',
+        { onClick: reset },
+        'reset'
     )
 );
 
+function addOne() {
+    count++;
+    console.log('adding one');
+}
+
+function minusOne() {
+    console.log('-1');
+}
+
+function reset() {
+    console.log('reset');
+}
+
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+ReactDOM.render(templateTwo, appRoot);
